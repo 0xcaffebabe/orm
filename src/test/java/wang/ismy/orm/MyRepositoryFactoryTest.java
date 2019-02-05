@@ -1,20 +1,9 @@
-# orm
-2019-2-1
+package wang.ismy.orm;
 
-根据个人对ORM框架理解的一个简单实现
-#
-2019-2-5
+import org.junit.Test;
 
-有如下一个仓库接口：
-```java
-public interface EntityRepository {
+import static org.junit.Assert.*;
 
-    void sayHello();
-}
-```
-
-获取该接口的实现类:
-```java
 public class MyRepositoryFactoryTest {
 
     @Test
@@ -25,4 +14,3 @@ public class MyRepositoryFactoryTest {
         m.sayHello();
     }
 }
-```
