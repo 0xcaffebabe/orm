@@ -9,16 +9,20 @@ public class MyRepositoryFactory {
 
     private DataSource dataSource;
 
+    private RepositoryInvocationHandler invocationHandler;
     public MyRepositoryFactory(DataSource dataSource) {
         this.dataSource = dataSource;
+        invocationHandler = new RepositoryInvocationHandler(dataSource);
     }
 
-    public <T>T getRepositoryAgent(Class type){
+    public <T>T getRepositoryAgent(Class<T> type){
         if (!type.isInterface()){
             throw new IllegalArgumentException("类型必须为接口类型");
         }
-
-        return (T) Proxy.newProxyInstance(type.getClassLoader(),new Class[]{type},new RepositoryInvocationHandler());
-
+        return type.cast
+                (Proxy.newProxyInstance(type.getClassLoader(),
+                        new Class[]{type},
+                        invocationHandler)
+                );
     }
 }
